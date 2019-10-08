@@ -9,6 +9,7 @@ import {
 
 import * as strings from 'HelloWorldReactWebPartStrings';
 import HelloWorldReact from './components/HelloWorldReact';
+import {App, IAppProps} from "./components/App";
 import { IHelloWorldReactProps } from './components/IHelloWorldReactProps';
 
 export interface IHelloWorldReactWebPartProps {
@@ -21,8 +22,8 @@ export default class HelloWorldReactWebPart extends BaseClientSideWebPart<IHello
     const {email, displayName} = this.context.pageContext.user;
 
     console.log("This: ", this);
-    const element: React.ReactElement<IHelloWorldReactProps > = React.createElement(
-      HelloWorldReact,
+    const element: React.ReactElement<IAppProps> = React.createElement(
+      App,
       {
         description: this.properties.description,
         email: email,

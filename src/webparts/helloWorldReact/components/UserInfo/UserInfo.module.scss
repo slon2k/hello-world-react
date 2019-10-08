@@ -1,0 +1,13 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.userInfo {
+  .title {
+    @include ms-font-xl;
+    @include ms-fontColor-blue;
+  }
+
+  .subtitle {
+    @include ms-font-l;
+    @include ms-fontColor-greenDark;
+  }
+}

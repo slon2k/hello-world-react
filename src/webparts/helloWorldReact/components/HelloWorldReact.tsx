@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './HelloWorldReact.module.scss';
 import { IHelloWorldReactProps } from './IHelloWorldReactProps';
 import { escape } from '@microsoft/sp-lodash-subset';
-import UserInfo from './UserInfo';
+import { UserInfo } from './UserInfo/UserInfo';
 
 
 export default class HelloWorldReact extends React.Component<IHelloWorldReactProps, {}> {

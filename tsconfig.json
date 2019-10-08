@@ -29,7 +29,8 @@
     ]
   },
   "include": [
-    "src/**/*.ts", "src/webparts/helloWorldReact/components/UserInfo/index.js"
+    "src/**/*.ts",
+    "src/webparts/helloWorldReact/components/UserInfo/index"
   ],
   "exclude": [
     "node_modules",
