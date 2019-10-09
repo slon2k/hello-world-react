@@ -8,9 +8,7 @@ import {
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'HelloWorldReactWebPartStrings';
-import HelloWorldReact from './components/HelloWorldReact';
 import {App, IAppProps} from "./components/App";
-import { IHelloWorldReactProps } from './components/IHelloWorldReactProps';
 
 export interface IHelloWorldReactWebPartProps {
   description: string;
@@ -20,8 +18,19 @@ export default class HelloWorldReactWebPart extends BaseClientSideWebPart<IHello
 
   public render(): void {
     const {email, displayName} = this.context.pageContext.user;
+    console.log(this.context);
 
-    console.log("This: ", this);
+    const URL = '/sites/dev/_api/Web/Lists(guid\'44da09e2-9766-40c7-a48a-4680f6ef4700\')/Items';
+    const {absoluteUrl} = this.context.pageContext.site;
+
+    fetch(`${absoluteUrl}${URL}`,
+      {headers:
+          { accept: "application/json;odata=verbose" }
+    })
+      .then(result => result.json())
+      .then(({d}) => console.log(d.results))
+      .catch(error => console.error(error));
+
     const element: React.ReactElement<IAppProps> = React.createElement(
       App,
       {
