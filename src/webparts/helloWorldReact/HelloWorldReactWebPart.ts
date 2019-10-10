@@ -18,6 +18,7 @@ export default class HelloWorldReactWebPart extends BaseClientSideWebPart<IHello
 
   public render(): void {
     const {email, displayName} = this.context.pageContext.user;
+    console.log(this);
     console.log(this.context.pageContext.user);
     const {absoluteUrl} = this.context.pageContext.site;
 
