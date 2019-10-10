@@ -9,9 +9,7 @@ import {useState} from "react";
 export const App: React.FunctionComponent<IAppProps> = ({email, name, description, absoluteUrl}) => {
   const [todos, setTodos] = useState([]);
   const api = new apiService(absoluteUrl);
-  const res = api.getListItems().then(result => setTodos(result));
-  //todoItems.push({id: "1", title: "first", completed: false});
-  //todoItems.push({id: "2", title: "second", completed: true});
+  api.getListItems().then(result => setTodos(result));
   return (
     <div className={styles.App}>
       <h2>App component</h2>

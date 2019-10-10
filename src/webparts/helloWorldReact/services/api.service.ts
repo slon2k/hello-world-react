@@ -5,7 +5,7 @@ const convertItem = (item) => {
   console.log(item);
   const {Id, Title, Completed} = item;
   return {id: Id, title: Title, completed: Completed};
-}
+};
 
 export default class apiService {
   private baseUrl: string;
@@ -19,6 +19,7 @@ export default class apiService {
     const result = await fetch(`${this.baseUrl}${URL}`, {headers});
 
     if (!result.ok) {
+      console.error(result);
       throw new Error(`Could not fetch data, received ${result.status}`);
     }
 
@@ -27,5 +28,8 @@ export default class apiService {
       .then(res => res.map(item => convertItem(item)));
   }
 
+  public createListItem = async (title: string) => {
+
+  }
 
 }
