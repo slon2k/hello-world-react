@@ -17,8 +17,14 @@ export const App: React.FunctionComponent<IAppProps> = ({email, name, descriptio
   };
 
   const createTodo = async (title: string) => {
-    await api.createListItem(title);
-  }
+    await api.createListItem(title).then(console.log);
+    await fetchData();
+  };
+
+  const deleteTodo = async (id: string) => {
+    await api.deleteListItem(id);
+    await fetchData();
+  };
 
   useEffect(() => {
     fetchData();
@@ -31,7 +37,7 @@ export const App: React.FunctionComponent<IAppProps> = ({email, name, descriptio
       <UserInfo email={email} name={name}/>
       <NewTodo onSubmit = {createTodo}/>
       {todos.length > 0
-        ? <TodoList items={todos}/>
+        ? <TodoList items={todos} deleteTodo={deleteTodo}/>
         : <div>No items to show</div>
       }
     </div>
