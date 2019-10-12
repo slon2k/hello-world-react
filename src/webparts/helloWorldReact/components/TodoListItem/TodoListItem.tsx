@@ -1,5 +1,5 @@
 import * as React from "react";
-import "./TodoListItem.module.scss";
+import styles from "./TodoListItem.module.scss";
 import {ITodoItem} from "../../interfaces";
 import {useState} from "react";
 
@@ -34,12 +34,17 @@ export const TodoListItem: React.FunctionComponent<ITodoListItem> = ({item, dele
     }
   }
 
+  const handleCheck = () => {
+    updateTodo({...item, completed: !item.completed});
+  }
+
   const handleChange = (e) => {
     setNewTitle(e.target.value)
   }
 
   return (
-    <div>
+    <div className={styles.TodoListItem}>
+      <input type="checkbox" onChange={handleCheck} checked={item.completed}/>
       { editing
         ? <span>
             <input type="text" value={newTitle} onChange={handleChange} onKeyDown={onKeyDown}/>
@@ -47,7 +52,7 @@ export const TodoListItem: React.FunctionComponent<ITodoListItem> = ({item, dele
             <button onClick={save}>Save</button>
           </span>
         : <span>
-            <span>{title}</span>
+            <span className={item.completed ? styles.completed : ""}>{title}</span>
             <button onClick={edit}>Edit</button>
           </span>
       }

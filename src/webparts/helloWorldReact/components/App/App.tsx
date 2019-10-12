@@ -38,8 +38,6 @@ export const App: React.FunctionComponent<IAppProps> = ({email, name, descriptio
 
   return (
     <div className={styles.App}>
-      <h2>App component</h2>
-      <h3> {description} </h3>
       <UserInfo email={email} name={name}/>
       <NewTodo onSubmit = {createTodo}/>
       {todos.length > 0
