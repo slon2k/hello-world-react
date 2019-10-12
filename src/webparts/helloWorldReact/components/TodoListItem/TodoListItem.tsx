@@ -14,31 +14,41 @@ export const TodoListItem: React.FunctionComponent<ITodoListItem> = ({item, dele
   const [editing, setEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
-  const onCancel = () => {
+  const cancel = () => {
     setNewTitle(title);
     setEditing(false);
   }
 
-  const onSave = () => {
+  const save = () => {
     setEditing(false);
     updateTodo({...item, title: newTitle});
   }
 
-  const onEdit = () => {
+  const edit = () => {
     setEditing(true)
+  }
+
+  const onKeyDown = (e) => {
+    if (e.key == "Enter") {
+      save();
+    }
+  }
+
+  const handleChange = (e) => {
+    setNewTitle(e.target.value)
   }
 
   return (
     <div>
       { editing
         ? <span>
-            <input type="text" value={newTitle} onChange={(e) => setNewTitle(e.target.value)}/>
-            <button onClick={onCancel}>Cancel</button>
-            <button onClick={onSave}>Save</button>
+            <input type="text" value={newTitle} onChange={handleChange} onKeyDown={onKeyDown}/>
+            <button onClick={cancel}>Cancel</button>
+            <button onClick={save}>Save</button>
           </span>
         : <span>
             <span>{title}</span>
-            <button onClick={() => setEditing(true)}>Edit</button>
+            <button onClick={edit}>Edit</button>
           </span>
       }
 
