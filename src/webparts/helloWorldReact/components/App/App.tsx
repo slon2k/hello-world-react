@@ -6,6 +6,7 @@ import styles from "./App.module.scss";
 import apiService from "../../services/api.service";
 import {useEffect, useState} from "react";
 import NewTodo from "../NewTodo";
+import {ITodoItem} from "../../interfaces";
 
 
 export const App: React.FunctionComponent<IAppProps> = ({email, name, description, absoluteUrl}) => {
@@ -26,6 +27,11 @@ export const App: React.FunctionComponent<IAppProps> = ({email, name, descriptio
     await fetchData();
   };
 
+  const updateTodo = async (todo: ITodoItem) => {
+    await api.updateListItem(todo);
+    await fetchData();
+  }
+
   useEffect(() => {
     fetchData();
   }, []);
@@ -37,7 +43,7 @@ export const App: React.FunctionComponent<IAppProps> = ({email, name, descriptio
       <UserInfo email={email} name={name}/>
       <NewTodo onSubmit = {createTodo}/>
       {todos.length > 0
-        ? <TodoList items={todos} deleteTodo={deleteTodo}/>
+        ? <TodoList items={todos} deleteTodo={deleteTodo} updateTodo={updateTodo}/>
         : <div>No items to show</div>
       }
     </div>

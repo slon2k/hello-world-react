@@ -1,3 +1,5 @@
+import {ITodoItem} from "../interfaces";
+
 const URL = '/_api/Web/Lists(guid\'44da09e2-9766-40c7-a48a-4680f6ef4700\')/Items';
 const headers = { accept: "application/json;odata=verbose" };
 
@@ -54,6 +56,17 @@ export default class apiService {
         });
     }
 
+    if (method == "UPDATE") {
+      return (
+      { "accept": "application/json;odata=verbose",
+        "content-type": "application/json;odata=verbose",
+        "IF-MATCH": "*",
+        "X-HTTP-Method":"MERGE",
+        "X-RequestDigest": this.requestDigest,
+        "content-length": `<length of post body>`
+      });
+    }
+
     return (
       { accept: "application/json;odata=verbose" }
     );
@@ -90,6 +103,23 @@ export default class apiService {
     return await result.json();
 
   }
+
+  public updateListItem = async (item: ITodoItem) => {
+    const result = await fetch(
+      `${this.baseUrl}${URL}(${item.id})`,
+      {
+        method: "POST",
+        headers: this.createHeaders("UPDATE"),
+        body: JSON.stringify(
+          {
+            __metadata: { "type": "SP.Data.Todo_x0020_listListItem" },
+          Title: item.title,
+          Completed: item.completed
+          })
+      }
+    )
+  }
+
 
   public deleteListItem = async (id: string) => {
 
